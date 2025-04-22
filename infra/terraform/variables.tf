@@ -8,9 +8,9 @@ variable "administrator_password" {
   sensitive   = true
 }
 
-
 variable "location" {
   type        = string
   default     = "westeurope"
   description = "Which Azure region should be used?"
 }
+

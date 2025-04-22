@@ -52,3 +52,8 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+infra/terraform/modules/.DS_Store
+
+infra/terraform/terraform.tfstate
+
+infra/terraform/terraform.tfstate.backup

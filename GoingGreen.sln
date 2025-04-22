@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "terraform", "terraform", "{
 		infra\terraform\main.tf = infra\terraform\main.tf
 		infra\terraform\variables.tf = infra\terraform\variables.tf
 		infra\terraform\terraform.tfvars = infra\terraform\terraform.tfvars
+		infra\terraform\output.tf = infra\terraform\output.tf
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apphost", "apphost", "{665619A4-E581-4CC0-A92B-CA123E5C1056}"
@@ -48,6 +49,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "postgresql", "postgresql", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{671F6661-E670-42BF-B55A-34E7540052CD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "container_app", "container_app", "{6F659718-ABB7-464F-BD95-7EAF526CA11A}"
+	ProjectSection(SolutionItems) = preProject
+		infra\terraform\modules\container_app\output.tf = infra\terraform\modules\container_app\output.tf
+		infra\terraform\modules\container_app\variables.tf = infra\terraform\modules\container_app\variables.tf
+		infra\terraform\modules\container_app\main.tf = infra\terraform\modules\container_app\main.tf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "container_registry", "container_registry", "{DEC011F2-CAC4-45A6-A0C0-C4092712E62F}"
+	ProjectSection(SolutionItems) = preProject
+		infra\terraform\modules\container_registry\main.tf = infra\terraform\modules\container_registry\main.tf
+		infra\terraform\modules\container_registry\output.tf = infra\terraform\modules\container_registry\output.tf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "log_analytics", "log_analytics", "{42D86EED-F3C8-41AC-BEC2-91069C5AB4FC}"
+	ProjectSection(SolutionItems) = preProject
+		infra\terraform\modules\log_analytics\main.tf = infra\terraform\modules\log_analytics\main.tf
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +89,9 @@ Global
 		{6CAA071A-DD9D-4D42-ACAF-1CD57EC4A29F} = {7C088BD9-D467-476F-9AC8-58AD6F5B00CC}
 		{671F6661-E670-42BF-B55A-34E7540052CD} = {70233444-0482-4EF1-8893-B9DD62D0C6BC}
 		{D4539C30-C5D5-464C-BD7A-B93D67966833} = {671F6661-E670-42BF-B55A-34E7540052CD}
+		{6F659718-ABB7-464F-BD95-7EAF526CA11A} = {671F6661-E670-42BF-B55A-34E7540052CD}
+		{DEC011F2-CAC4-45A6-A0C0-C4092712E62F} = {671F6661-E670-42BF-B55A-34E7540052CD}
+		{42D86EED-F3C8-41AC-BEC2-91069C5AB4FC} = {671F6661-E670-42BF-B55A-34E7540052CD}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{67DBB4BA-A8FA-4E74-AE51-BEDAFAAAF661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
