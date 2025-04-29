@@ -53,7 +53,7 @@ module "payment_api" {
   name                         = "payment-api"
   resource_group_name          = azurerm_resource_group.main.name
   container_app_environment_id = azurerm_container_app_environment.main.id
-  image                        = "${module.container_registry.acr_login_server}/payment-api:latest"
+  image                        =  "${module.container_registry.acr_login_server}/payment-api:latest"
   registry_server              = module.container_registry.acr_login_server
   registry_username            = module.container_registry.acr_username
   registry_password            = module.container_registry.acr_password

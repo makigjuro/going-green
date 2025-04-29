@@ -1,5 +1,7 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
+
+
 var postgres = builder.AddPostgres("postgres")
     .WithImage("postgres:15-alpine")
     .WithPgAdmin(pgAdmin => pgAdmin.WithHostPort(5050))
