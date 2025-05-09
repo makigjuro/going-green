@@ -48,12 +48,77 @@ module container_registry {
   location               = azurerm_resource_group.main.location
 }
 
+module "gateway" {
+  source = "./modules/container_app"
+
+  name                         = "gateway"
+  resource_group_name          = azurerm_resource_group.main.name
+  container_app_environment_id = azurerm_container_app_environment.main.id
+
+  image                        =  "${module.container_registry.acr_login_server}/gateway:latest"
+  registry_server              = module.container_registry.acr_login_server
+  registry_username            = module.container_registry.acr_username
+  registry_password            = module.container_registry.acr_password
+
+  env_variables = {
+    "ASPNETCORE_ENVIRONMENT" = "Production"
+    # Add URLs or service discovery details for downstream microservices
+  }
+
+  expose_public_ingress = true  
+}
+
+
 module "payment_api" {
   source                       = "./modules/container_app"
   name                         = "payment-api"
   resource_group_name          = azurerm_resource_group.main.name
   container_app_environment_id = azurerm_container_app_environment.main.id
   image                        =  "${module.container_registry.acr_login_server}/payment-api:latest"
+  registry_server              = module.container_registry.acr_login_server
+  registry_username            = module.container_registry.acr_username
+  registry_password            = module.container_registry.acr_password
+}
+
+module "customer_api" {
+  source                       = "./modules/container_app"
+  name                         = "customer-api"
+  resource_group_name          = azurerm_resource_group.main.name
+  container_app_environment_id = azurerm_container_app_environment.main.id
+  image                        =  "${module.container_registry.acr_login_server}/customer-api:latest"
+  registry_server              = module.container_registry.acr_login_server
+  registry_username            = module.container_registry.acr_username
+  registry_password            = module.container_registry.acr_password
+}
+
+module "quote_api" {
+  source                       = "./modules/container_app"
+  name                         = "quote-api"
+  resource_group_name          = azurerm_resource_group.main.name
+  container_app_environment_id = azurerm_container_app_environment.main.id
+  image                        =  "${module.container_registry.acr_login_server}/quote-api:latest"
+  registry_server              = module.container_registry.acr_login_server
+  registry_username            = module.container_registry.acr_username
+  registry_password            = module.container_registry.acr_password
+}
+
+module "shipping_api" {
+  source                       = "./modules/container_app"
+  name                         = "shipping-api"
+  resource_group_name          = azurerm_resource_group.main.name
+  container_app_environment_id = azurerm_container_app_environment.main.id
+  image                        =  "${module.container_registry.acr_login_server}/shipping-api:latest"
+  registry_server              = module.container_registry.acr_login_server
+  registry_username            = module.container_registry.acr_username
+  registry_password            = module.container_registry.acr_password
+}
+
+module "device_registry_api" {
+  source                       = "./modules/container_app"
+  name                         = "device-registry-api"
+  resource_group_name          = azurerm_resource_group.main.name
+  container_app_environment_id = azurerm_container_app_environment.main.id
+  image                        =  "${module.container_registry.acr_login_server}/device-registry-api:latest"
   registry_server              = module.container_registry.acr_login_server
   registry_username            = module.container_registry.acr_username
   registry_password            = module.container_registry.acr_password

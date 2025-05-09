@@ -33,7 +33,7 @@ resource "azurerm_container_app" "this" {
   }
 
   ingress {
-    external_enabled = true
+    external_enabled = var.expose_public_ingress
     target_port      = 80
     transport        = "auto"
     traffic_weight {

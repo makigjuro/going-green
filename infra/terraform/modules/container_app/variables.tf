@@ -48,3 +48,8 @@ variable "env_variables" {
   type = map(string)
   default = {}
 }
+
+variable "expose_public_ingress" {
+  type    = bool
+  default = false
+}
