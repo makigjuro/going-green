@@ -11,6 +11,7 @@ var postgres = builder.AddPostgres("postgres")
 
 var goingGreenDb = postgres.AddDatabase("going-green-db");
 
+
 var customerService = builder.AddProject<Projects.GoingGreen_Customer_API>("customerservice")
     .WithReference(goingGreenDb);
 var paymentService = builder.AddProject<Projects.GoingGreen_Payment_API>("paymentservice")
@@ -21,5 +22,8 @@ var shippingService = builder.AddProject<Projects.GoingGreen_Shipping_API>("ship
     .WithReference(goingGreenDb);
 var deviceRegistryService = builder.AddProject<Projects.GoingGreen_DeviceRegistry_API>("deviceregistryservice")
     .WithReference(goingGreenDb);
+
+builder.AddHttpIngress("ingress")
+    .WithServiceBinding(gateway, port: 80);
 
 builder.Build().Run();

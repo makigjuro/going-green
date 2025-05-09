@@ -10,4 +10,8 @@
       <PackageReference Include="Microsoft.ReverseProxy" Version="1.0.0-preview.9.21116.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\GoingGreen.ServiceDefaults\GoingGreen.ServiceDefaults.csproj" />
+    </ItemGroup>
+
 </Project>
