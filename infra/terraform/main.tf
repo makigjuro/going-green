@@ -42,11 +42,11 @@ module "postgresql" {
   administrator_password = var.administrator_password
 }
 
-module container_registry {
-  source                 = "./modules/container_registry"
-  resource_group_name    = azurerm_resource_group.main.name
-  location               = azurerm_resource_group.main.location
-}
+# module container_registry {
+#   source                 = "./modules/container_registry"
+#   resource_group_name    = azurerm_resource_group.main.name
+#   location               = azurerm_resource_group.main.location
+# }
 
 module "gateway" {
   source = "./modules/container_app"

@@ -1,0 +1,54 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  OWNER: ${{ github.repository_owner }}
+  TAG: ${{ github.sha }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    strategy:
+      matrix:
+        service:
+          - name: gateway
+            path: src/Gateway/GoingGreen.Gateway
+          - name: customer-api
+            path: src/Customer/GoingGreen.Customer.API
+          - name: payment-api
+            path: stc/Payment/GoingGreen.Payment.API
+          - name: shipping-api
+            path: src/Shipping/GoingGreen.Shipping.API
+          - name: quote-api
+            path: src/Quote/GoingGreen.Quote.API
+          - name: device-registry-api
+            path: DeviceRegistry/GoingGreen.DeviceRegistry.API
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: ${{ matrix.service.path }}
+          file: ${{ matrix.service.path }}/Dockerfile
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ matrix.service.name }}:${{ env.TAG }}
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ matrix.service.name }}:latest

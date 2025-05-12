@@ -54,7 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "container_app", "container_
 		infra\terraform\modules\container_app\main.tf = infra\terraform\modules\container_app\main.tf
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "container_registry", "container_registry", "{DEC011F2-CAC4-45A6-A0C0-C4092712E62F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure_container_registry", "azure_container_registry", "{DEC011F2-CAC4-45A6-A0C0-C4092712E62F}"
 	ProjectSection(SolutionItems) = preProject
 		infra\terraform\modules\container_registry\main.tf = infra\terraform\modules\container_registry\main.tf
 		infra\terraform\modules\container_registry\output.tf = infra\terraform\modules\container_registry\output.tf
