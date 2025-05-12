@@ -9,19 +9,19 @@ var postgres = builder.AddPostgres("postgres")
 
 var goingGreenDb = postgres.AddDatabase("going-green-db");
 
-var customerService = builder.AddProject<Projects.GoingGreen_Customer_API>("customerservice")
+var customerService = builder.AddProject<Projects.GoingGreen_Customer_API>("customer-api")
     .WithReference(goingGreenDb);
 
-var paymentService = builder.AddProject<Projects.GoingGreen_Payment_API>("paymentservice")
+var paymentService = builder.AddProject<Projects.GoingGreen_Payment_API>("payment-api")
     .WithReference(goingGreenDb);
 
-var quoteService = builder.AddProject<Projects.GoingGreen_Quote_API>("quoteservice")
+var quoteService = builder.AddProject<Projects.GoingGreen_Quote_API>("quote-api")
     .WithReference(goingGreenDb);
 
-var shippingService = builder.AddProject<Projects.GoingGreen_Shipping_API>("shippingservice")
+var shippingService = builder.AddProject<Projects.GoingGreen_Shipping_API>("shipping-api")
     .WithReference(goingGreenDb);
 
-var deviceRegistryService = builder.AddProject<Projects.GoingGreen_DeviceRegistry_API>("deviceregistryservice")
+var deviceRegistryService = builder.AddProject<Projects.GoingGreen_DeviceRegistry_API>("device-registry-api")
     .WithReference(goingGreenDb);
 
 var gateway = builder.AddProject<Projects.GoingGreen_Gateway>("gateway")
