@@ -7,17 +7,17 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/DeviceRegistry/DeviceRegistry.API/DeviceRegistry.API.csproj", "src/DeviceRegistry/DeviceRegistry.API/"]
-RUN dotnet restore "src/DeviceRegistry/DeviceRegistry.API/DeviceRegistry.API.csproj"
+COPY ["src/DeviceRegistry/GoingGreen.DeviceRegistry.API/GoingGreen.DeviceRegistry.API.csproj", "src/DeviceRegistry/GoingGreen.DeviceRegistry.API/"]
+RUN dotnet restore "src/DeviceRegistry/GoingGreen.DeviceRegistry.API/GoingGreen.DeviceRegistry.API.csproj"
 COPY . .
-WORKDIR "/src/src/DeviceRegistry/DeviceRegistry.API"
-RUN dotnet build "DeviceRegistry.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/src/DeviceRegistry/GoingGreen.DeviceRegistry.API"
+RUN dotnet build "GoingGreen.DeviceRegistry.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "DeviceRegistry.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "GoingGreen.DeviceRegistry.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "DeviceRegistry.API.dll"]
+ENTRYPOINT ["dotnet", "GoingGreen.DeviceRegistry.API.dll"]
