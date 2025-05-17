@@ -15,4 +15,11 @@
       <ProjectReference Include="..\..\Common\GoingGreen.ServiceDefaults\GoingGreen.ServiceDefaults.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+        <DependentUpon>Dockerfile</DependentUpon>
+      </Content>
+    </ItemGroup>
+
 </Project>
