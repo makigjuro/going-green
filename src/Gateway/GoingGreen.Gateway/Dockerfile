@@ -14,10 +14,10 @@ WORKDIR /src
 COPY . .
 
 # Restore the Gateway project (correct path and filename)
-RUN dotnet restore "src/Gateway/GoingGreen.Gateway.API/GoingGreen.Gateway.csproj"
+RUN dotnet restore "src/Gateway/GoingGreen.Gateway/GoingGreen.Gateway.csproj"
 
 # Build the Gateway project
-RUN dotnet build "src/Gateway/GoingGreen.Gateway.API/GoingGreen.Gateway.csproj" \
+RUN dotnet build "src/Gateway/GoingGreen.Gateway/GoingGreen.Gateway.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/build
 
@@ -25,7 +25,7 @@ RUN dotnet build "src/Gateway/GoingGreen.Gateway.API/GoingGreen.Gateway.csproj" 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 
-RUN dotnet publish "src/Gateway/GoingGreen.Gateway.API/GoingGreen.Gateway.csproj" \
+RUN dotnet publish "src/Gateway/GoingGreen.Gateway/GoingGreen.Gateway.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/publish /p:UseAppHost=false
 
