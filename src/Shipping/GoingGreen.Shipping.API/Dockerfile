@@ -10,9 +10,9 @@ WORKDIR /src
 
 COPY . .
 
-RUN dotnet restore "src/Shipping/GoingGreen.Shipping/GoingGreen.Shipping.API.csproj"
+RUN dotnet restore "src/Shipping/GoingGreen.Shipping.API/GoingGreen.Shipping.API.csproj"
 
-RUN dotnet build "src/Shipping/GoingGreen.Shipping/GoingGreen.Shipping.API.csproj" \
+RUN dotnet build "src/Shipping/GoingGreen.Shipping.API/GoingGreen.Shipping.API.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/build
 
@@ -20,7 +20,7 @@ RUN dotnet build "src/Shipping/GoingGreen.Shipping/GoingGreen.Shipping.API.cspro
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 
-RUN dotnet publish "src/Shipping/GoingGreen.Shipping/GoingGreen.Shipping.API.csproj" \
+RUN dotnet publish "src/Shipping/GoingGreen.Shipping.API/GoingGreen.Shipping.API.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/publish /p:UseAppHost=false
 

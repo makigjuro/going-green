@@ -13,9 +13,9 @@ WORKDIR /src
 # Copy all source so shared projects (e.g. ServiceDefaults) are included
 COPY . .
 
-RUN dotnet restore "src/Customer/GoingGreen.Customer/GoingGreen.Customer.API.csproj"
+RUN dotnet restore "src/Customer/GoingGreen.Customer.API/GoingGreen.Customer.API.csproj"
 
-RUN dotnet build "src/Customer/GoingGreen.Customer/GoingGreen.Customer.API.csproj" \
+RUN dotnet build "src/Customer/GoingGreen.Customer.API/GoingGreen.Customer.API.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/build
 
@@ -23,7 +23,7 @@ RUN dotnet build "src/Customer/GoingGreen.Customer/GoingGreen.Customer.API.cspro
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 
-RUN dotnet publish "src/Customer/GoingGreen.Customer/GoingGreen.Customer.API.csproj" \
+RUN dotnet publish "src/Customer/GoingGreen.Customer.API/GoingGreen.Customer.API.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/publish /p:UseAppHost=false
 

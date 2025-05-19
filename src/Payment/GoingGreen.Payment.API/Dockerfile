@@ -10,9 +10,9 @@ WORKDIR /src
 
 COPY . .
 
-RUN dotnet restore "src/Payment/GoingGreen.Payment/GoingGreen.Payment.API.csproj"
+RUN dotnet restore "src/Payment/GoingGreen.Payment.API/GoingGreen.Payment.API.csproj"
 
-RUN dotnet build "src/Payment/GoingGreen.Payment/GoingGreen.Payment.API.csproj" \
+RUN dotnet build "src/Payment/GoingGreen.Payment.API/GoingGreen.Payment.API.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/build
 
@@ -20,7 +20,7 @@ RUN dotnet build "src/Payment/GoingGreen.Payment/GoingGreen.Payment.API.csproj" 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 
-RUN dotnet publish "src/Payment/GoingGreen.Payment/GoingGreen.Payment.API.csproj" \
+RUN dotnet publish "src/Payment/GoingGreen.Payment.API/GoingGreen.Payment.API.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/publish /p:UseAppHost=false
 

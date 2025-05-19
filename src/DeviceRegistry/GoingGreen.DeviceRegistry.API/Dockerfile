@@ -10,9 +10,9 @@ WORKDIR /src
 
 COPY . .
 
-RUN dotnet restore "src/DeviceRegistry/GoingGreen.DeviceRegistry/GoingGreen.DeviceRegistry.API.csproj"
+RUN dotnet restore "src/DeviceRegistry/GoingGreen.DeviceRegistry.API/GoingGreen.DeviceRegistry.API.csproj"
 
-RUN dotnet build "src/DeviceRegistry/GoingGreen.DeviceRegistry/GoingGreen.DeviceRegistry.API.csproj" \
+RUN dotnet build "src/DeviceRegistry/GoingGreen.DeviceRegistry.API/GoingGreen.DeviceRegistry.API.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/build
 
@@ -20,7 +20,7 @@ RUN dotnet build "src/DeviceRegistry/GoingGreen.DeviceRegistry/GoingGreen.Device
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 
-RUN dotnet publish "src/DeviceRegistry/GoingGreen.DeviceRegistry/GoingGreen.DeviceRegistry.API.csproj" \
+RUN dotnet publish "src/DeviceRegistry/GoingGreen.DeviceRegistry.API/GoingGreen.DeviceRegistry.API.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/publish /p:UseAppHost=false
 
