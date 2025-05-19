@@ -25,7 +25,7 @@ jobs:
           - name: customer-api
             path: src/Customer/GoingGreen.Customer.API
           - name: payment-api
-            path: stc/Payment/GoingGreen.Payment.API
+            path: src/Payment/GoingGreen.Payment.API
           - name: shipping-api
             path: src/Shipping/GoingGreen.Shipping.API
           - name: quote-api
