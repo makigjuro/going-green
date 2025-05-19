@@ -1,22 +1,33 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-USER $APP_UID
-WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+﻿# Use the repository root as the build context
 
+# ---------- BASE IMAGE ----------
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+WORKDIR /app
+EXPOSE 8080 8081
+
+# ---------- BUILD STAGE ----------
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Customer/GoingGreen.Customer.API/GoingGreen.Customer.API.csproj", "src/Customer/GoingGreen.Customer.API/"]
-RUN dotnet restore "src/Customer/GoingGreen.Customer.API/GoingGreen.Customer.API.csproj"
-COPY . .
-WORKDIR "/src/src/Customer/GoingGreen.Customer.API"
-RUN dotnet build "GoingGreen.Customer.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
+# Copy all source so shared projects (e.g. ServiceDefaults) are included
+COPY . .
+
+RUN dotnet restore "src/Customer/GoingGreen.Customer/GoingGreen.Customer.API.csproj"
+
+RUN dotnet build "src/Customer/GoingGreen.Customer/GoingGreen.Customer.API.csproj" \
+    -c $BUILD_CONFIGURATION \
+    -o /app/build
+
+# ---------- PUBLISH STAGE ----------
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "GoingGreen.Customer.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
+RUN dotnet publish "src/Customer/GoingGreen.Customer/GoingGreen.Customer.API.csproj" \
+    -c $BUILD_CONFIGURATION \
+    -o /app/publish /p:UseAppHost=false
+
+# ---------- FINAL IMAGE ----------
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .

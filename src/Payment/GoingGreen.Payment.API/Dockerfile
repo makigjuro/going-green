@@ -1,23 +1,31 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-USER $APP_UID
+﻿# ---------- BASE IMAGE ----------
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 8080 8081
 
+# ---------- BUILD STAGE ----------
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Payment/Payment.API/Payment.API.csproj", "src/Payment/Payment.API/"]
-RUN dotnet restore "src/Payment/Payment.API/Payment.API.csproj"
-COPY . .
-WORKDIR "/src/src/Payment/Payment.API"
-RUN dotnet build "Payment.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
+COPY . .
+
+RUN dotnet restore "src/Payment/GoingGreen.Payment/GoingGreen.Payment.API.csproj"
+
+RUN dotnet build "src/Payment/GoingGreen.Payment/GoingGreen.Payment.API.csproj" \
+    -c $BUILD_CONFIGURATION \
+    -o /app/build
+
+# ---------- PUBLISH STAGE ----------
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Payment.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
+RUN dotnet publish "src/Payment/GoingGreen.Payment/GoingGreen.Payment.API.csproj" \
+    -c $BUILD_CONFIGURATION \
+    -o /app/publish /p:UseAppHost=false
+
+# ---------- FINAL IMAGE ----------
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Payment.API.dll"]
+ENTRYPOINT ["dotnet", "GoingGreen.Payment.API.dll"]

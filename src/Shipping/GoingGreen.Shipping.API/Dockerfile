@@ -1,23 +1,31 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-USER $APP_UID
+﻿# ---------- BASE IMAGE ----------
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 8080 8081
 
+# ---------- BUILD STAGE ----------
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Shipping/Shipping.API/Shipping.API.csproj", "src/Shipping/Shipping.API/"]
-RUN dotnet restore "src/Shipping/Shipping.API/Shipping.API.csproj"
-COPY . .
-WORKDIR "/src/src/Shipping/Shipping.API"
-RUN dotnet build "Shipping.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
+COPY . .
+
+RUN dotnet restore "src/Shipping/GoingGreen.Shipping/GoingGreen.Shipping.API.csproj"
+
+RUN dotnet build "src/Shipping/GoingGreen.Shipping/GoingGreen.Shipping.API.csproj" \
+    -c $BUILD_CONFIGURATION \
+    -o /app/build
+
+# ---------- PUBLISH STAGE ----------
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Shipping.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
+RUN dotnet publish "src/Shipping/GoingGreen.Shipping/GoingGreen.Shipping.API.csproj" \
+    -c $BUILD_CONFIGURATION \
+    -o /app/publish /p:UseAppHost=false
+
+# ---------- FINAL IMAGE ----------
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Shipping.API.dll"]
+ENTRYPOINT ["dotnet", "GoingGreen.Shipping.API.dll"]
