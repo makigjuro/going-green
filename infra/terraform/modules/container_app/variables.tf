@@ -53,3 +53,8 @@ variable "expose_public_ingress" {
   type    = bool
   default = false
 }
+
+variable "key_vault_id" {
+  description = "key vault id where data is storred"
+  type        = string
+}

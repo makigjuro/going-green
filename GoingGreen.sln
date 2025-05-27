@@ -46,18 +46,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "postgresql", "postgresql", 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{671F6661-E670-42BF-B55A-34E7540052CD}"
+	ProjectSection(SolutionItems) = preProject
+		infra\terraform\modules\container_registry\output.tf = infra\terraform\modules\container_registry\output.tf
+		infra\terraform\modules\container_registry\variables.tf = infra\terraform\modules\container_registry\variables.tf
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "container_app", "container_app", "{6F659718-ABB7-464F-BD95-7EAF526CA11A}"
 	ProjectSection(SolutionItems) = preProject
 		infra\terraform\modules\container_app\output.tf = infra\terraform\modules\container_app\output.tf
 		infra\terraform\modules\container_app\variables.tf = infra\terraform\modules\container_app\variables.tf
 		infra\terraform\modules\container_app\main.tf = infra\terraform\modules\container_app\main.tf
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure_container_registry", "azure_container_registry", "{DEC011F2-CAC4-45A6-A0C0-C4092712E62F}"
-	ProjectSection(SolutionItems) = preProject
-		infra\terraform\modules\container_registry\main.tf = infra\terraform\modules\container_registry\main.tf
-		infra\terraform\modules\container_registry\output.tf = infra\terraform\modules\container_registry\output.tf
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "log_analytics", "log_analytics", "{42D86EED-F3C8-41AC-BEC2-91069C5AB4FC}"
@@ -72,6 +70,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoingGreen.Gateway", "src\Gateway\GoingGreen.Gateway\GoingGreen.Gateway.csproj", "{C6E4A0CF-2D79-4F42-98F3-898CDA16F689}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoingGreen.Customer.API", "src\Customer\GoingGreen.Customer.API\GoingGreen.Customer.API.csproj", "{A23BF5E2-55C7-42C8-85E2-850929403900}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure_key_vault", "azure_key_vault", "{97E6E0AF-C000-4749-A7C2-3BAE9EA48147}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "container_registry", "container_registry", "{C5A4925F-984D-4DD3-A245-12FC6FDDA0F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,11 +97,12 @@ Global
 		{671F6661-E670-42BF-B55A-34E7540052CD} = {70233444-0482-4EF1-8893-B9DD62D0C6BC}
 		{D4539C30-C5D5-464C-BD7A-B93D67966833} = {671F6661-E670-42BF-B55A-34E7540052CD}
 		{6F659718-ABB7-464F-BD95-7EAF526CA11A} = {671F6661-E670-42BF-B55A-34E7540052CD}
-		{DEC011F2-CAC4-45A6-A0C0-C4092712E62F} = {671F6661-E670-42BF-B55A-34E7540052CD}
 		{42D86EED-F3C8-41AC-BEC2-91069C5AB4FC} = {671F6661-E670-42BF-B55A-34E7540052CD}
 		{2EAEC5F4-0CC5-4883-84B1-F88D7D500D65} = {CE0CEC2D-34A0-41A2-9967-581F509BBB24}
 		{C6E4A0CF-2D79-4F42-98F3-898CDA16F689} = {2EAEC5F4-0CC5-4883-84B1-F88D7D500D65}
 		{A23BF5E2-55C7-42C8-85E2-850929403900} = {199203B2-5318-427A-BD66-3F5B19BA4C04}
+		{97E6E0AF-C000-4749-A7C2-3BAE9EA48147} = {671F6661-E670-42BF-B55A-34E7540052CD}
+		{C5A4925F-984D-4DD3-A245-12FC6FDDA0F9} = {671F6661-E670-42BF-B55A-34E7540052CD}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{67DBB4BA-A8FA-4E74-AE51-BEDAFAAAF661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

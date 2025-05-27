@@ -35,6 +35,12 @@ module "postgresql" {
   administrator_password = var.administrator_password
 }
 
+module "keyvault" {
+  source                 = "./modules/azure_key_vault"
+  resource_group_name    = azurerm_resource_group.main.name
+  location               = azurerm_resource_group.main.location
+}
+
 resource "azurerm_container_app_environment" "main" {
   name                       = "goinggreen-container-app-env"
   location                   = var.location
@@ -52,7 +58,8 @@ module "gateway" {
   name                         = "gateway"
   resource_group_name          = azurerm_resource_group.main.name
   container_app_environment_id = azurerm_container_app_environment.main.id
-  
+  key_vault_id                 = module.keyvault.key_vault_id  
+             
   # pull image from GitHub Container Registry 
   image               = "${local.ghcr_server}/gateway:latest"
   registry_server     = local.ghcr_server
@@ -72,6 +79,8 @@ module "payment_api" {
   name                         = "payment-api"
   resource_group_name          = azurerm_resource_group.main.name
   container_app_environment_id = azurerm_container_app_environment.main.id
+  key_vault_id                 = module.keyvault.key_vault_id
+
 
   # pull image from GitHub Container Registry 
   image               = "${local.ghcr_server}/payment-api:latest"
@@ -85,6 +94,8 @@ module "customer_api" {
   name                         = "customer-api"
   resource_group_name          = azurerm_resource_group.main.name
   container_app_environment_id = azurerm_container_app_environment.main.id
+  key_vault_id                 = module.keyvault.key_vault_id
+
 
   # pull image from GitHub Container Registry 
   image               = "${local.ghcr_server}/customer-api:latest"
@@ -98,6 +109,7 @@ module "quote_api" {
   name                         = "quote-api"
   resource_group_name          = azurerm_resource_group.main.name
   container_app_environment_id = azurerm_container_app_environment.main.id
+  key_vault_id                 = module.keyvault.key_vault_id
 
   # pull image from GitHub Container Registry 
   image               = "${local.ghcr_server}/quote-api:latest"
@@ -111,6 +123,7 @@ module "shipping_api" {
   name                         = "shipping-api"
   resource_group_name          = azurerm_resource_group.main.name
   container_app_environment_id = azurerm_container_app_environment.main.id
+  key_vault_id                 = module.keyvault.key_vault_id
 
   # pull image from GitHub Container Registry 
   image               = "${local.ghcr_server}/shipping-api:latest"
@@ -124,6 +137,7 @@ module "device_registry_api" {
   name                         = "device-registry-api"
   resource_group_name          = azurerm_resource_group.main.name
   container_app_environment_id = azurerm_container_app_environment.main.id
+  key_vault_id                 = module.keyvault.key_vault_id
 
   # pull image from GitHub Container Registry 
   image               = "${local.ghcr_server}/device-registry-api:latest"

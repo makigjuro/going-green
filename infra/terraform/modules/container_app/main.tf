@@ -4,6 +4,10 @@ resource "azurerm_container_app" "this" {
   resource_group_name          = var.resource_group_name
   revision_mode                = "Single"
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   template {
     container {
       name   = var.name
@@ -12,7 +16,7 @@ resource "azurerm_container_app" "this" {
       memory = "${var.memory}Gi"
 
       dynamic "env" {
-        for_each = var.env_variables
+        for_each = var.env_variables  
         content {
           name  = env.key
           value = env.value
@@ -41,4 +45,10 @@ resource "azurerm_container_app" "this" {
       latest_revision = true
     }
   }
+}
+
+resource "azurerm_role_assignment" "keyvault_reader" {
+  scope                = var.key_vault_id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id         = azurerm_container_app.this.identity[0].principal_id
 }

@@ -75,3 +75,7 @@ infra/terraform/.terraform/providers/registry.terraform.io/kreuzwerker/docker/3.
 infra/terraform/.terraform/providers/registry.terraform.io/kreuzwerker/docker/3.0.2/darwin_amd64/README.md
 .DS_Store
 src/.DS_Store
+
+infra/terraform/.terraform/providers/registry.terraform.io/hashicorp/random/3.7.2/darwin_amd64/LICENSE.txt
+
+infra/terraform/.terraform/providers/registry.terraform.io/hashicorp/random/3.7.2/darwin_amd64/terraform-provider-random_v3.7.2_x5
