@@ -63,6 +63,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "log_analytics", "log_analytics", "{42D86EED-F3C8-41AC-BEC2-91069C5AB4FC}"
 	ProjectSection(SolutionItems) = preProject
 		infra\terraform\modules\log_analytics\main.tf = infra\terraform\modules\log_analytics\main.tf
+		infra\terraform\modules\log_analytics\variables.tf = infra\terraform\modules\log_analytics\variables.tf
+		infra\terraform\modules\log_analytics\output.tf = infra\terraform\modules\log_analytics\output.tf
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{2EAEC5F4-0CC5-4883-84B1-F88D7D500D65}"

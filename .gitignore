@@ -57,3 +57,21 @@ infra/terraform/modules/.DS_Store
 infra/terraform/terraform.tfstate
 
 infra/terraform/terraform.tfstate.backup
+.DS_Store
+.idea/.idea.GoingGreen/.idea/.name
+.idea/.idea.GoingGreen/.idea/encodings.xml
+.idea/.idea.GoingGreen/.idea/indexLayout.xml
+.idea/.idea.GoingGreen/.idea/vcs.xml
+infra/terraform/.terraform.lock.hcl
+infra/terraform/.terraform/modules/modules.json
+infra/terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.117.1/darwin_amd64/LICENSE.txt
+infra/terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.117.1/darwin_amd64/terraform-provider-azurerm_v3.117.1_x5
+infra/terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.26.0/darwin_amd64/LICENSE.txt
+infra/terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.26.0/darwin_amd64/terraform-provider-azurerm_v4.26.0_x5
+infra/terraform/.terraform/providers/registry.terraform.io/hashicorp/random/3.7.1/darwin_amd64/LICENSE.txt
+infra/terraform/.terraform/providers/registry.terraform.io/hashicorp/random/3.7.1/darwin_amd64/terraform-provider-random_v3.7.1_x5
+infra/terraform/.terraform/providers/registry.terraform.io/kreuzwerker/docker/3.0.2/darwin_amd64/CHANGELOG.md
+infra/terraform/.terraform/providers/registry.terraform.io/kreuzwerker/docker/3.0.2/darwin_amd64/LICENSE
+infra/terraform/.terraform/providers/registry.terraform.io/kreuzwerker/docker/3.0.2/darwin_amd64/README.md
+.DS_Store
+src/.DS_Store
