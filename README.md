@@ -61,3 +61,43 @@ Below is the high-level architecture diagram for the solution:
    ```bash
    git clone https://github.com/makigjuro/going-green.git
    cd going-green
+
+2. **Authenticate to Azure**
+
+   ```bash
+   az login
+
+3. **Initialize Terraform**
+   
+   ```bash
+   cd infra/terraform
+   terraform init
+
+4. **Review and apply infrastructure**   
+   ```bash
+    terraform plan
+    terraform apply
+
+4. **Build and Deploy Services**   
+
+The GitHub Actions pipeline will automatically build Docker images and deploy to Azure Container Apps on push to main.
+
+## Infrastructure
+
+Terraform code is located in the infra/terraform folder. It defines:
+
+- Azure Resource Group
+
+- Container Apps Environment
+
+- Log Analytics Workspace
+
+- Managed Identities and Networking
+
+- Azure KeyVault
+
+- Postgresql Databases Server
+
+- Azure Service Bus
+
+
