@@ -2,7 +2,7 @@
 
 ![MIT License](https://img.shields.io/badge/License-MIT-green)
 
-**Going Green** is an example .NET microservices solution showcasing a well-architected microservice architecture with Azure Container Apps deployment. The idea is inspired by Neal Ford’s Going Green architecture kata ([https://nealford.com/katas/kata?id=GoingGreen](https://nealford.com/katas/kata?id=GoingGreen)), this project demonstrates best practices with .NET 9 and .NET Aspire, and is still a work in progress.
+**Going Green** is an example .NET microservices solution showcasing a well-architected microservice architecture with Azure Container Apps deployment. The idea is inspired by Neal Ford’s Going Green architecture kata ([https://nealford.com/katas/kata?id=GoingGreen](https://nealford.com/katas/kata?id=GoingGreen)), this project demonstrates best practices with .NET 9 and .NET Aspire, design of Microservices, Infrastructure as a Code and Cloud Arhitectures. Still a work in progress.
 
 ## Table of Contents
 
@@ -13,10 +13,7 @@
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [Infrastructure](#infrastructure)
-- [CI/CD](#cicd)
-- [Project Structure](#project-structure)
 - [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## About
@@ -99,5 +96,10 @@ Terraform code is located in the infra/terraform folder. It defines:
 - Postgresql Databases Server
 
 - Azure Service Bus
+
+
+## Contributing
+
+
 
 
