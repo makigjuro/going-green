@@ -14,7 +14,7 @@
 - [Getting Started](#getting-started)
 - [Infrastructure](#infrastructure)
 - [Contributing](#contributing)
-- [Contact](#contact)
+- [License](#license)
 
 ## About
 
@@ -99,6 +99,10 @@ Terraform code is located in the infra/terraform folder. It defines:
 
 
 ## Contributing
+Contributions are welcome! Please open an issue or submit a pull request.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 
 
