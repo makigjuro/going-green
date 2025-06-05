@@ -40,15 +40,15 @@ module "keyvault" {
   location               = azurerm_resource_group.main.location
 }
 
+locals {
+  ghcr_server = "ghcr.io/${var.ghcr_owner}"
+}
+
 resource "azurerm_container_app_environment" "main" {
   name                       = "goinggreen-container-app-env"
   location                   = var.location
   resource_group_name        = var.resource_group_name
   log_analytics_workspace_id = module.log_analytics_workspace.log_analytics_workspace_id
-}
-
-locals {
-  ghcr_server = "ghcr.io/${var.ghcr_owner}"
 }
 
 module "gateway" {
