@@ -43,6 +43,18 @@ variable "memory" {
   default     = 1.0
 }
 
+variable "max_replicas" {
+  description = "Max Number of Containers that can run in parallel"
+  type        = number
+  default     = 5  
+}
+
+variable "min_replicas" {
+  description = "Min Number of Containers that can run"
+  type        = number
+  default     = 1  
+}
+
 variable "env_variables" {
   description = "Environment variables for the container app"
   type = map(string)

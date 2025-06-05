@@ -21,7 +21,15 @@ resource "azurerm_container_app" "this" {
           name  = env.key
           value = env.value
         }
-      }
+      } 
+    }
+
+    max_replicas = var.max_replicas
+    min_replicas = var.min_replicas
+    
+    http_scale_rule {
+      name    = "http-rule"
+      concurrent_requests = "50"
     }
   }
 
@@ -45,6 +53,7 @@ resource "azurerm_container_app" "this" {
       latest_revision = true
     }
   }
+
 }
 
 resource "azurerm_role_assignment" "keyvault_reader" {

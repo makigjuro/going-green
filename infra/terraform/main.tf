@@ -26,7 +26,6 @@ module "log_analytics_workspace"  {
   location               = azurerm_resource_group.main.location
 }
 
-
 module "postgresql" {
   source                 = "./modules/postgresql"
   name                   = "goinggreenpggsql"
