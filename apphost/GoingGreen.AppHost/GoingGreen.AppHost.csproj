@@ -23,6 +23,12 @@
       <ProjectReference Include="..\..\src\Payment\GoingGreen.Payment.API\GoingGreen.Payment.API.csproj" />
       <ProjectReference Include="..\..\src\Quote\GoingGreen.Quote.API\GoingGreen.Quote.API.csproj" />
       <ProjectReference Include="..\..\src\Shipping\GoingGreen.Shipping.API\GoingGreen.Shipping.API.csproj" />
+    </ItemGroup>    
+
+    <ItemGroup>
+      <None Update="ServiceBusConfig.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

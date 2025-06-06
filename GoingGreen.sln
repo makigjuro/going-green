@@ -75,6 +75,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure_key_vault", "azure_ke
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "container_registry", "container_registry", "{C5A4925F-984D-4DD3-A245-12FC6FDDA0F9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure_service_bus", "azure_service_bus", "{37256377-03AF-4F74-A9F1-DFC3F7B53C83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,7 @@ Global
 		{A23BF5E2-55C7-42C8-85E2-850929403900} = {199203B2-5318-427A-BD66-3F5B19BA4C04}
 		{97E6E0AF-C000-4749-A7C2-3BAE9EA48147} = {671F6661-E670-42BF-B55A-34E7540052CD}
 		{C5A4925F-984D-4DD3-A245-12FC6FDDA0F9} = {671F6661-E670-42BF-B55A-34E7540052CD}
+		{37256377-03AF-4F74-A9F1-DFC3F7B53C83} = {671F6661-E670-42BF-B55A-34E7540052CD}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{67DBB4BA-A8FA-4E74-AE51-BEDAFAAAF661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

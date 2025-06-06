@@ -40,6 +40,12 @@ module "keyvault" {
   location               = azurerm_resource_group.main.location
 }
 
+module "service_bus" {
+  source                 = "./modules/azure_service_bus"
+  resource_group_name    = azurerm_resource_group.main.name
+  location               = azurerm_resource_group.main.location
+}
+
 locals {
   ghcr_server = "ghcr.io/${var.ghcr_owner}"
 }
