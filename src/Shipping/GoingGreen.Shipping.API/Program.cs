@@ -1,7 +1,10 @@
+using Shipping.API;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
+builder.AddEventing();
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
