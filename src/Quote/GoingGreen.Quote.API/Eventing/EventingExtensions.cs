@@ -1,5 +1,7 @@
 using Azure.Messaging.ServiceBus;
 using Marten;
+using Marten.Events;
+using Weasel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
