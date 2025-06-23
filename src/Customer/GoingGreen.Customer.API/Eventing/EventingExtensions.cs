@@ -1,4 +1,5 @@
 using Azure.Messaging.ServiceBus;
+using JasperFx;
 using Marten;
 using Marten.Events;
 using Weasel.Core;
@@ -18,8 +19,9 @@ public static class EventingExtensions
         {
             opts.Connection(pg);
             opts.AutoCreateSchemaObjects = AutoCreate.All;
-            opts.UseDefaultSerialization(nonPublicMembersStorage: NonPublicMembersStorage.All);
-        }).UseLightweightSessions().UseEventing();
+        })
+        .UseLightweightSessions()
+        .UseNpgsqlDataSource();
 
         var sb = configuration.GetConnectionString("ServiceBus") ?? configuration["SERVICEBUS_CONNECTION_STRING"];
         if (!string.IsNullOrWhiteSpace(sb))

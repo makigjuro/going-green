@@ -1,4 +1,5 @@
 using Azure.Messaging.ServiceBus;
+using JasperFx;
 using Marten;
 using Marten.Events;
 using Weasel.Core;
@@ -14,12 +15,13 @@ public static class EventingExtensions
         var configuration = builder.Configuration;
         var pg = configuration.GetConnectionString("Postgres") ?? configuration["POSTGRES_CONNECTION_STRING"];
         builder.Services.AddMarten(opts =>
-        {
-            opts.Connection(pg);
-            opts.AutoCreateSchemaObjects = AutoCreate.All;
-            opts.UseDefaultSerialization(nonPublicMembersStorage: NonPublicMembersStorage.All);
-        }).UseLightweightSessions().UseEventing();
-
+            {
+                opts.Connection(pg);
+                opts.AutoCreateSchemaObjects = AutoCreate.All;
+            })
+            .UseLightweightSessions()
+            .UseNpgsqlDataSource();
+        
         var sb = configuration.GetConnectionString("ServiceBus") ?? configuration["SERVICEBUS_CONNECTION_STRING"];
         if (!string.IsNullOrWhiteSpace(sb))
         {
