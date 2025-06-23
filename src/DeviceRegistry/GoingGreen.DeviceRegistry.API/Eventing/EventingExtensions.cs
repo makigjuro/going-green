@@ -16,7 +16,7 @@ public static class EventingExtensions
             opts.Connection(pg);
             opts.AutoCreateSchemaObjects = AutoCreate.All;
             opts.UseDefaultSerialization(nonPublicMembersStorage: NonPublicMembersStorage.All);
-        }).UseLightweightSessions().UseEventStore();
+        }).UseLightweightSessions().UseEventing();
 
         var sb = configuration.GetConnectionString("ServiceBus") ?? configuration["SERVICEBUS_CONNECTION_STRING"];
         if (!string.IsNullOrWhiteSpace(sb))
