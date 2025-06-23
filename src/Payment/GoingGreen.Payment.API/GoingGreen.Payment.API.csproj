@@ -8,9 +8,11 @@
         <RootNamespace>Payment.API</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4"/>
-    </ItemGroup>
+  <ItemGroup>
+          <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
+          <PackageReference Include="Marten" Version="7.5.0" />
+          <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.17.0" />
+  </ItemGroup>
 
     <ItemGroup>
       <Content Include="..\..\..\.dockerignore">
