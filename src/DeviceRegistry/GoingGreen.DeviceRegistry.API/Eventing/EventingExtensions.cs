@@ -4,6 +4,7 @@ using Marten.Events;
 using Weasel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Weasel.Core;
 
 namespace DeviceRegistry.API;
 
@@ -18,7 +19,11 @@ public static class EventingExtensions
             opts.Connection(pg);
             opts.AutoCreateSchemaObjects = AutoCreate.All;
             opts.UseDefaultSerialization(nonPublicMembersStorage: NonPublicMembersStorage.All);
+<<<<<<< Updated upstream
         }).UseLightweightSessions().UseEventing();
+=======
+        }).UseLightweightSessions().Use();
+>>>>>>> Stashed changes
 
         var sb = configuration.GetConnectionString("ServiceBus") ?? configuration["SERVICEBUS_CONNECTION_STRING"];
         if (!string.IsNullOrWhiteSpace(sb))

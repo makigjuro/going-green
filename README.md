@@ -24,7 +24,7 @@ Going Green demonstrates how to build, deploy, and manage containerized microser
 
 Below is the high-level architecture diagram for the solution:
 
-![Architecture Diagram](./docs/architecture.png)
+![Architecture Diagram](./docs/gg-deployment_architecture.drawio.png)
 
 ## Features
 

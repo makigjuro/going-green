@@ -4,6 +4,7 @@ using Marten.Events;
 using Weasel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Weasel.Core;
 
 namespace Payment.API;
 
