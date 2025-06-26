@@ -1,4 +1,3 @@
-namespace Quote.API;
+namespace Quote.API.Domain.Events;
 
 public record QuoteRequested(Guid QuoteId, Guid DeviceId, decimal InitialValue, string CustomerInfo);
-public record QuoteProvided(Guid QuoteId, decimal EstimatedValue);
