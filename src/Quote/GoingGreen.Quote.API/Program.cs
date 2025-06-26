@@ -1,3 +1,4 @@
+using Quote.API;
 using Quote.API.Application.Commands;
 using Quote.API.Application.Queries;
 using Quote.API.Endpoints;

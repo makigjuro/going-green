@@ -1,3 +1,5 @@
+using Quote.API.Domain.Events;
+
 namespace Quote.API.Domain;
 
 public enum QuoteStatus
