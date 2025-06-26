@@ -3,6 +3,7 @@ namespace Quote.API.Application.Commands;
 using Marten;
 using Quote.API.Domain;
 using Quote.API.Domain.Events;
+using Quote.API.Infrastructure.Messaging;
 
 public record CreateQuote(Guid DeviceId, decimal InitialValue, string CustomerInfo)
 {

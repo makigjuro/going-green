@@ -2,6 +2,7 @@ namespace Quote.API.Application.Commands;
 
 using Marten;
 using Quote.API.Domain.Events;
+using Quote.API.Infrastructure.Messaging;
 
 public record ProvideQuote(Guid QuoteId, decimal EstimatedValue)
 {

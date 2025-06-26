@@ -1,4 +1,7 @@
-using Quote.API;
+using Quote.API.Infrastructure.Config;
+using Quote.API.Infrastructure.Messaging;
+builder.AddMartenSetup();
+builder.AddMessaging();
 using Quote.API.Application.Commands;
 using Quote.API.Application.Queries;
 using Quote.API.Endpoints;
