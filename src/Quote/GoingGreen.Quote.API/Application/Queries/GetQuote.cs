@@ -2,10 +2,11 @@ namespace Quote.API.Application.Queries;
 
 using Marten;
 using Quote.API.Domain;
+using GoingGreen.CQRS;
 
 public record GetQuote(Guid Id)
 {
-    public class Handler
+    public class Handler : IQueryHandler<GetQuote, QuoteAggregate?>
     {
         private readonly IDocumentStore _store;
 

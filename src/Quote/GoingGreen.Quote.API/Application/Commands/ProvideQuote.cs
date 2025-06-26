@@ -3,10 +3,11 @@ namespace Quote.API.Application.Commands;
 using Marten;
 using Quote.API.Domain.Events;
 using Quote.API.Infrastructure.Messaging;
+using GoingGreen.CQRS;
 
 public record ProvideQuote(Guid QuoteId, decimal EstimatedValue)
 {
-    public class Handler
+    public class Handler : ICommandHandler<ProvideQuote>
     {
         private readonly IDocumentStore _store;
         private readonly IEventPublisher _publisher;

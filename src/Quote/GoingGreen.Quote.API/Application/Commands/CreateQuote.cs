@@ -4,10 +4,11 @@ using Marten;
 using Quote.API.Domain;
 using Quote.API.Domain.Events;
 using Quote.API.Infrastructure.Messaging;
+using GoingGreen.CQRS;
 
 public record CreateQuote(Guid DeviceId, decimal InitialValue, string CustomerInfo)
 {
-    public class Handler
+    public class Handler : ICommandHandler<CreateQuote, Guid>
     {
         private readonly IDocumentStore _store;
         private readonly IEventPublisher _publisher;
