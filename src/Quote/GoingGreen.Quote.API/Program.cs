@@ -1,7 +1,5 @@
 using Quote.API.Infrastructure.Config;
 using Quote.API.Infrastructure.Messaging;
-builder.AddMartenSetup();
-builder.AddMessaging();
 using Quote.API.Application.Commands;
 using Quote.API.Application.Queries;
 using Quote.API.Endpoints;
@@ -10,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
-builder.AddEventing();
+builder.AddMartenSetup();
+builder.AddMessaging();
 
 // Add services to the container.
 builder.Services.AddProblemDetails();

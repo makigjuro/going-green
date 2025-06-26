@@ -1,14 +1,11 @@
+using JasperFx;
 using Marten;
-using Marten.Events;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Marten.Events.Projections;
 using Quote.API.Domain;
-using Quote.API.Domain.Events;
-using Weasel.Core;
 
 namespace Quote.API.Infrastructure.Config;
 
-public static class MartenSetup
+public static class MartenExtensions
 {
     public static IHostApplicationBuilder AddMartenSetup(this IHostApplicationBuilder builder)
     {
@@ -18,7 +15,7 @@ public static class MartenSetup
             {
                 opts.Connection(pg);
                 opts.AutoCreateSchemaObjects = AutoCreate.All;
-                opts.Projections.SelfAggregate<QuoteAggregate>();
+                opts.Projections.Snapshot<QuoteAggregate>(SnapshotLifecycle.Inline);
             })
             .UseLightweightSessions()
             .UseNpgsqlDataSource();
