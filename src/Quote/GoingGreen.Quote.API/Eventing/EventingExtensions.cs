@@ -6,6 +6,9 @@ using Weasel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Weasel.Core;
+using GoingGreen.Quote.Application.Projections;
+using GoingGreen.Quote.Application.Services;
+using JasperFx.Events.Projections;
 
 namespace Quote.API;
 
@@ -19,6 +22,10 @@ public static class EventingExtensions
             {
                 opts.Connection(pg);
                 opts.AutoCreateSchemaObjects = AutoCreate.All;
+                
+                // Register projections
+                opts.Projections.Add<QuoteProjectionBuilder>(ProjectionLifecycle.Inline);
+                opts.Projections.Add<CustomerQuotesProjectionBuilder>(ProjectionLifecycle.Inline);
             })
             .UseLightweightSessions()
             .UseNpgsqlDataSource();
@@ -29,6 +36,9 @@ public static class EventingExtensions
             builder.Services.AddSingleton(new ServiceBusClient(sb));
             builder.Services.AddSingleton<IEventPublisher, ServiceBusEventPublisher>();
         }
+
+        // Register application services
+        builder.Services.AddScoped<IQuoteService, QuoteService>();
 
         return builder;
     }

@@ -28,9 +28,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{AFAB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoingGreen.DeviceRegistry.API", "src\DeviceRegistry\GoingGreen.DeviceRegistry.API\GoingGreen.DeviceRegistry.API.csproj", "{0B7C5E05-0F71-4EE0-994D-1D6E548CCC7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoingGreen.DeviceRegistry.Application", "src\DeviceRegistry\GoingGreen.DeviceRegistry.Application\GoingGreen.DeviceRegistry.Application.csproj", "{1A7F4D8E-C9B2-4F63-8E5A-3D6C9F2B1E8D}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoingGreen.Payment.API", "src\Payment\GoingGreen.Payment.API\GoingGreen.Payment.API.csproj", "{56CA1618-D631-4D48-BCDB-4560591B11BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoingGreen.Quote.API", "src\Quote\GoingGreen.Quote.API\GoingGreen.Quote.API.csproj", "{7E45F360-53AF-404A-8CD8-AD74DCA8416D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoingGreen.Quote.Application", "src\Quote\GoingGreen.Quote.Application\GoingGreen.Quote.Application.csproj", "{8F92E471-B5C3-4A89-9D7F-2E5A6B8C7D4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoingGreen.Shipping.API", "src\Shipping\GoingGreen.Shipping.API\GoingGreen.Shipping.API.csproj", "{10AEE487-C213-4391-95DE-7CB3E9CF7644}"
 EndProject
@@ -72,10 +76,24 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoingGreen.Customer.API", "src\Customer\GoingGreen.Customer.API\GoingGreen.Customer.API.csproj", "{A23BF5E2-55C7-42C8-85E2-850929403900}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure_key_vault", "azure_key_vault", "{97E6E0AF-C000-4749-A7C2-3BAE9EA48147}"
+	ProjectSection(SolutionItems) = preProject
+		infra\terraform\modules\azure_key_vault\variables.tf = infra\terraform\modules\azure_key_vault\variables.tf
+		infra\terraform\modules\azure_key_vault\main.tf = infra\terraform\modules\azure_key_vault\main.tf
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "container_registry", "container_registry", "{C5A4925F-984D-4DD3-A245-12FC6FDDA0F9}"
+	ProjectSection(SolutionItems) = preProject
+		infra\terraform\modules\container_registry\output.tf = infra\terraform\modules\container_registry\output.tf
+		infra\terraform\modules\container_registry\variables.tf = infra\terraform\modules\container_registry\variables.tf
+		infra\terraform\modules\container_registry\main.tf = infra\terraform\modules\container_registry\main.tf
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure_service_bus", "azure_service_bus", "{37256377-03AF-4F74-A9F1-DFC3F7B53C83}"
+	ProjectSection(SolutionItems) = preProject
+		infra\terraform\modules\azure_service_bus\main.tf = infra\terraform\modules\azure_service_bus\main.tf
+		infra\terraform\modules\azure_service_bus\variables.tf = infra\terraform\modules\azure_service_bus\variables.tf
+		infra\terraform\modules\azure_service_bus\output.tf = infra\terraform\modules\azure_service_bus\output.tf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,8 +109,10 @@ Global
 		{3329B9D0-8371-4499-8F92-EF61BBCAA84F} = {CE0CEC2D-34A0-41A2-9967-581F509BBB24}
 		{AFABF5FC-DCBD-4644-AB2B-A5264B2FA66E} = {CE0CEC2D-34A0-41A2-9967-581F509BBB24}
 		{0B7C5E05-0F71-4EE0-994D-1D6E548CCC7A} = {2FE24632-23CF-4ECC-9BF4-3B7E12CEEC20}
+		{1A7F4D8E-C9B2-4F63-8E5A-3D6C9F2B1E8D} = {2FE24632-23CF-4ECC-9BF4-3B7E12CEEC20}
 		{56CA1618-D631-4D48-BCDB-4560591B11BD} = {AFABF5FC-DCBD-4644-AB2B-A5264B2FA66E}
 		{7E45F360-53AF-404A-8CD8-AD74DCA8416D} = {3329B9D0-8371-4499-8F92-EF61BBCAA84F}
+		{8F92E471-B5C3-4A89-9D7F-2E5A6B8C7D4E} = {3329B9D0-8371-4499-8F92-EF61BBCAA84F}
 		{10AEE487-C213-4391-95DE-7CB3E9CF7644} = {771C9A28-97A1-469A-AF0F-936426752DF0}
 		{7C088BD9-D467-476F-9AC8-58AD6F5B00CC} = {CE0CEC2D-34A0-41A2-9967-581F509BBB24}
 		{6CAA071A-DD9D-4D42-ACAF-1CD57EC4A29F} = {7C088BD9-D467-476F-9AC8-58AD6F5B00CC}
@@ -116,6 +136,10 @@ Global
 		{0B7C5E05-0F71-4EE0-994D-1D6E548CCC7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B7C5E05-0F71-4EE0-994D-1D6E548CCC7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B7C5E05-0F71-4EE0-994D-1D6E548CCC7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A7F4D8E-C9B2-4F63-8E5A-3D6C9F2B1E8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A7F4D8E-C9B2-4F63-8E5A-3D6C9F2B1E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A7F4D8E-C9B2-4F63-8E5A-3D6C9F2B1E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A7F4D8E-C9B2-4F63-8E5A-3D6C9F2B1E8D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{56CA1618-D631-4D48-BCDB-4560591B11BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56CA1618-D631-4D48-BCDB-4560591B11BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56CA1618-D631-4D48-BCDB-4560591B11BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -124,6 +148,10 @@ Global
 		{7E45F360-53AF-404A-8CD8-AD74DCA8416D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E45F360-53AF-404A-8CD8-AD74DCA8416D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E45F360-53AF-404A-8CD8-AD74DCA8416D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F92E471-B5C3-4A89-9D7F-2E5A6B8C7D4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F92E471-B5C3-4A89-9D7F-2E5A6B8C7D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F92E471-B5C3-4A89-9D7F-2E5A6B8C7D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F92E471-B5C3-4A89-9D7F-2E5A6B8C7D4E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10AEE487-C213-4391-95DE-7CB3E9CF7644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10AEE487-C213-4391-95DE-7CB3E9CF7644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10AEE487-C213-4391-95DE-7CB3E9CF7644}.Release|Any CPU.ActiveCfg = Release|Any CPU
