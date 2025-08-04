@@ -32,6 +32,8 @@ jobs:
             path: src/Quote/GoingGreen.Quote.API
           - name: device-registry-api
             path: src/DeviceRegistry/GoingGreen.DeviceRegistry.API
+          - name: assessment-api
+            path: src/Assessment/GoingGreen.Assessment.API
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

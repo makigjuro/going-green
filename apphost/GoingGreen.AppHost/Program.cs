@@ -51,17 +51,23 @@ var deviceRegistryService = builder.AddProject<Projects.GoingGreen_DeviceRegistr
     .WithReference(goingGreenDb)
     .WithEnvironment("ServiceBus__ConnectionString", serviceBusConnectionString);
 
+var assessmentService = builder.AddProject<Projects.GoingGreen_Assessment_API>("assessment-api")
+    .WithReference(goingGreenDb)
+    .WithEnvironment("ServiceBus__ConnectionString", serviceBusConnectionString);
+
 var gateway = builder.AddProject<Projects.GoingGreen_Gateway>("gateway")
     .WithReference(customerService)
     .WithReference(paymentService)
     .WithReference(quoteService)
     .WithReference(shippingService)
     .WithReference(deviceRegistryService)
+    .WithReference(assessmentService)
     .WaitFor(customerService)
     .WaitFor(paymentService)
     .WaitFor(quoteService)
     .WaitFor(shippingService)
     .WaitFor(deviceRegistryService)
+    .WaitFor(assessmentService)
     .WithExternalHttpEndpoints();
 
 builder.Build().Run();

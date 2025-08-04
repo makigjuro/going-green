@@ -150,3 +150,17 @@ module "device_registry_api" {
   registry_username   = var.ghcr_username
   registry_password   = var.ghcr_token
 }
+
+module "assessment_api" {
+  source                       = "./modules/container_app"
+  name                         = "assessment-api"
+  resource_group_name          = azurerm_resource_group.main.name
+  container_app_environment_id = azurerm_container_app_environment.main.id
+  key_vault_id                 = module.keyvault.key_vault_id
+
+  # pull image from GitHub Container Registry 
+  image               = "${local.ghcr_server}/assessment-api:latest"
+  registry_server     = local.ghcr_server
+  registry_username   = var.ghcr_username
+  registry_password   = var.ghcr_token
+}

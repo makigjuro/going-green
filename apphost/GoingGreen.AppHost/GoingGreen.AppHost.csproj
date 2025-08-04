@@ -18,6 +18,7 @@
         </ItemGroup>    
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\Assessment\GoingGreen.Assessment.API\GoingGreen.Assessment.API.csproj" />
       <ProjectReference Include="..\..\src\Customer\GoingGreen.Customer.API\GoingGreen.Customer.API.csproj" />
       <ProjectReference Include="..\..\src\DeviceRegistry\GoingGreen.DeviceRegistry.API\GoingGreen.DeviceRegistry.API.csproj" />
       <ProjectReference Include="..\..\src\Gateway\GoingGreen.Gateway\GoingGreen.Gateway.csproj" />
