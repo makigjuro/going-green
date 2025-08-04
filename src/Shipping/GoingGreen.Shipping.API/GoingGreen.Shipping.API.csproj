@@ -22,6 +22,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Common\GoingGreen.ServiceDefaults\GoingGreen.ServiceDefaults.csproj" />
+      <ProjectReference Include="..\GoingGreen.Shipping.Application\GoingGreen.Shipping.Application.csproj" />
     </ItemGroup>
 
 </Project>

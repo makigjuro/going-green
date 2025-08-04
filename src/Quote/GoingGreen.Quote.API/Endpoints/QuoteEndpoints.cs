@@ -1,6 +1,8 @@
 using GoingGreen.Quote.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Quote.API.Models;
+using Quote.API.IntegrationEvents;
+using Quote.API;
 
 namespace Quote.API.Endpoints;
 
@@ -39,11 +41,32 @@ public static class QuoteEndpoints
 
         quotes.MapPost("/{quoteId:guid}/accept", async (
             Guid quoteId,
-            [FromServices] IQuoteService quoteService) =>
+            [FromServices] IQuoteService quoteService,
+            [FromServices] IEventPublisher eventPublisher) =>
         {
             try
             {
                 await quoteService.AcceptQuoteAsync(quoteId);
+
+                // Get quote details for integration event
+                var quote = await quoteService.GetQuoteAsync(quoteId);
+                if (quote != null)
+                {
+                    // Publish integration event for other services (like Shipping)
+                    var integrationEvent = new QuoteAcceptedIntegrationEvent(
+                        quote.Id,
+                        quote.CustomerId,
+                        "Customer Name", // TODO: Get from Customer service
+                        "customer@example.com", // TODO: Get from Customer service
+                        quote.DeviceType,
+                        quote.DeviceBrand,
+                        quote.DeviceModel,
+                        quote.EstimatedValue ?? 0,
+                        DateTime.UtcNow);
+
+                    await eventPublisher.PublishAsync(integrationEvent);
+                }
+
                 return Results.Ok();
             }
             catch (InvalidOperationException ex)

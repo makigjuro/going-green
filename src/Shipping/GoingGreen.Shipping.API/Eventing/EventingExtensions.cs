@@ -5,6 +5,10 @@ using Marten.Events;
 using Weasel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using GoingGreen.Shipping.Application.Projections;
+using GoingGreen.Shipping.Application.Services;
+using JasperFx.Events.Projections;
+using Shipping.API.IntegrationEvents;
 
 namespace Shipping.API;
 
@@ -18,6 +22,10 @@ public static class EventingExtensions
             {
                 opts.Connection(pg);
                 opts.AutoCreateSchemaObjects = AutoCreate.All;
+                
+                // Register projections
+                opts.Projections.Add<ShipmentProjectionBuilder>(ProjectionLifecycle.Inline);
+                opts.Projections.Add<CustomerShipmentsProjectionBuilder>(ProjectionLifecycle.Inline);
             })
             .UseLightweightSessions()
             .UseNpgsqlDataSource();
@@ -27,6 +35,19 @@ public static class EventingExtensions
         {
             builder.Services.AddSingleton(new ServiceBusClient(sb));
             builder.Services.AddSingleton<IEventPublisher, ServiceBusEventPublisher>();
+        }
+
+        // Register application services
+        builder.Services.AddScoped<IShippingService, ShippingService>();
+        
+        // Register mock implementations for external services
+        builder.Services.AddScoped<IShippingLabelGenerator, Shipping.API.Services.MockShippingLabelGenerator>();
+        builder.Services.AddScoped<IShippingCarrierNotifier, Shipping.API.Services.MockShippingCarrierNotifier>();
+
+        // Register integration event handlers
+        if (!string.IsNullOrWhiteSpace(sb))
+        {
+            builder.Services.AddHostedService<QuoteAcceptedIntegrationEventHandler>();
         }
 
         return builder;

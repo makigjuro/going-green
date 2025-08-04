@@ -1,6 +1,72 @@
 @Shipping.API_HostAddress = http://localhost:5026
 
-GET {{Shipping.API_HostAddress}}/weatherforecast/
-Accept: application/json
+### Create a new shipment
+POST {{Shipping.API_HostAddress}}/shipments
+Content-Type: application/json
+
+{
+  "quoteId": "123e4567-e89b-12d3-a456-426614174000",
+  "customerId": "987fcdeb-51a2-43d7-890a-123456789abc",
+  "customerName": "John Doe",
+  "customerEmail": "john.doe@example.com",
+  "deviceType": "Smartphone",
+  "deviceBrand": "Apple",
+  "deviceModel": "iPhone 14 Pro",
+  "quoteValue": 850.00
+}
+
+###
+
+### Get shipment by ID (replace {{shipmentId}} with actual ID from create response)
+GET {{Shipping.API_HostAddress}}/shipments/00000000-0000-0000-0000-000000000000
+
+###
+
+### Get shipment by tracking number
+GET {{Shipping.API_HostAddress}}/shipments/tracking/1Z123456789012345
+
+###
+
+### Generate shipping label (replace {{shipmentId}} with actual ID)
+POST {{Shipping.API_HostAddress}}/shipments/00000000-0000-0000-0000-000000000000/generate-label
+
+###
+
+### Update tracking information (replace {{shipmentId}} with actual ID)
+POST {{Shipping.API_HostAddress}}/shipments/00000000-0000-0000-0000-000000000000/tracking
+Content-Type: application/json
+
+{
+  "status": "in_transit",
+  "statusDescription": "Package is in transit",
+  "location": "Chicago, IL Distribution Center",
+  "estimatedDeliveryDate": "2024-12-25T10:00:00Z"
+}
+
+###
+
+### Mark as delivered (replace {{shipmentId}} with actual ID)
+POST {{Shipping.API_HostAddress}}/shipments/00000000-0000-0000-0000-000000000000/deliver
+Content-Type: application/json
+
+{
+  "deliveredTo": "John Doe",
+  "deliveryLocation": "Front door"
+}
+
+###
+
+### Cancel shipment (replace {{shipmentId}} with actual ID)
+POST {{Shipping.API_HostAddress}}/shipments/00000000-0000-0000-0000-000000000000/cancel
+Content-Type: application/json
+
+{
+  "reason": "Customer cancelled order"
+}
+
+###
+
+### Get customer shipments
+GET {{Shipping.API_HostAddress}}/customers/987fcdeb-51a2-43d7-890a-123456789abc/shipments
 
 ###
