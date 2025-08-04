@@ -1,34 +1,91 @@
-using Quote.API.Application.Commands;
-using Quote.API.Application.Queries;
+using GoingGreen.Quote.Application.Services;
+using Microsoft.AspNetCore.Mvc;
+using Quote.API.Models;
+using Quote.API.IntegrationEvents;
+using Quote.API;
 
 namespace Quote.API.Endpoints;
 
 public static class QuoteEndpoints
 {
-    public static IEndpointRouteBuilder MapQuoteEndpoints(this IEndpointRouteBuilder app)
+    public static void MapQuoteEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("/quotes");
+        var quotes = app.MapGroup("/quotes").WithTags("Quotes");
 
-        group.MapPost("/", async (CreateQuote command, CreateQuote.Handler createHandler, GetQuote.Handler getHandler, CancellationToken ct) =>
+        quotes.MapPost("/", async (
+            [FromBody] QuoteRequest request,
+            [FromServices] IQuoteService quoteService) =>
         {
-            var id = await createHandler.HandleAsync(command, ct);
-            var quote = await getHandler.HandleAsync(new GetQuote(id), ct);
-            return Results.Created($"/quotes/{id}", quote);
-        });
+            var quoteId = await quoteService.RequestQuoteAsync(
+                request.CustomerId,
+                request.DeviceType,
+                request.DeviceCondition,
+                request.DeviceBrand,
+                request.DeviceModel,
+                request.DeviceAge);
 
-        group.MapPost("/{id:guid}/provide", async (Guid id, ProvideQuote request, ProvideQuote.Handler provideHandler, GetQuote.Handler getHandler, CancellationToken ct) =>
+            return Results.Created($"/quotes/{quoteId}", new { QuoteId = quoteId });
+        })
+        .WithName("RequestQuote")
+        .WithOpenApi();
+
+        quotes.MapGet("/{quoteId:guid}", async (
+            Guid quoteId,
+            [FromServices] IQuoteService quoteService) =>
         {
-            await provideHandler.HandleAsync(request with { QuoteId = id }, ct);
-            var quote = await getHandler.HandleAsync(new GetQuote(id), ct);
-            return Results.Ok(quote);
-        });
+            var quote = await quoteService.GetQuoteAsync(quoteId);
+            return quote is not null ? Results.Ok(quote) : Results.NotFound();
+        })
+        .WithName("GetQuote")
+        .WithOpenApi();
 
-        group.MapGet("/{id:guid}", async (Guid id, GetQuote.Handler handler, CancellationToken ct) =>
+        quotes.MapPost("/{quoteId:guid}/accept", async (
+            Guid quoteId,
+            [FromServices] IQuoteService quoteService,
+            [FromServices] IEventPublisher eventPublisher) =>
         {
-            var quote = await handler.HandleAsync(new GetQuote(id), ct);
-            return quote is null ? Results.NotFound() : Results.Ok(quote);
-        });
+            try
+            {
+                await quoteService.AcceptQuoteAsync(quoteId);
 
-        return app;
+                // Get quote details for integration event
+                var quote = await quoteService.GetQuoteAsync(quoteId);
+                if (quote != null)
+                {
+                    // Publish integration event for other services (like Shipping)
+                    var integrationEvent = new QuoteAcceptedIntegrationEvent(
+                        quote.Id,
+                        quote.CustomerId,
+                        "Customer Name", // TODO: Get from Customer service
+                        "customer@example.com", // TODO: Get from Customer service
+                        quote.DeviceType,
+                        quote.DeviceBrand,
+                        quote.DeviceModel,
+                        quote.EstimatedValue ?? 0,
+                        DateTime.UtcNow);
+
+                    await eventPublisher.PublishAsync(integrationEvent);
+                }
+
+                return Results.Ok();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Results.BadRequest(ex.Message);
+            }
+        })
+        .WithName("AcceptQuote")
+        .WithOpenApi();
+
+        quotes.MapPost("/{quoteId:guid}/reject", async (
+            Guid quoteId,
+            [FromBody] RejectQuoteRequest request,
+            [FromServices] IQuoteService quoteService) =>
+        {
+            await quoteService.RejectQuoteAsync(quoteId, request.Reason);
+            return Results.Ok();
+        })
+        .WithName("RejectQuote")
+        .WithOpenApi();
     }
 }

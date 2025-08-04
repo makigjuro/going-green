@@ -1,0 +1,101 @@
+### Assessment API Tests
+
+@baseUrl = http://localhost:5071
+@assessmentId = {{$guid}}
+@shipmentId = {{$guid}}
+@quoteId = {{$guid}}
+@customerId = {{$guid}}
+
+### 1. Receive Package for Assessment
+POST {{baseUrl}}/api/assessments/packages/{{shipmentId}}/receive
+Content-Type: application/json
+
+{
+  "quoteId": "{{quoteId}}",
+  "customerId": "{{customerId}}",
+  "trackingNumber": "TRK123456789",
+  "deviceType": "smartphone",
+  "deviceBrand": "Apple",
+  "deviceModel": "iPhone 14 Pro",
+  "originalQuoteValue": 899.99,
+  "expectedCondition": "Good",
+  "receivedBy": "John Doe",
+  "receivingLocation": "Assessment Facility A"
+}
+
+### 2. Get Assessment Details
+GET {{baseUrl}}/api/assessments/{{assessmentId}}
+
+### 3. Get Customer Assessments
+GET {{baseUrl}}/api/assessments/customers/{{customerId}}
+
+### 4. Get Inspection Criteria for Device Type
+GET {{baseUrl}}/api/assessments/devices/smartphone/criteria
+
+### 5. Start Inspection
+POST {{baseUrl}}/api/assessments/{{assessmentId}}/inspection/start
+Content-Type: application/json
+
+{
+  "inspectorId": "INS001",
+  "inspectorName": "Jane Smith"
+}
+
+### 6. Complete Inspection
+POST {{baseUrl}}/api/assessments/{{assessmentId}}/inspection/complete
+Content-Type: application/json
+
+{
+  "inspectionResults": {
+    "PowersOn": true,
+    "ScreenFunctional": true,
+    "BatteryHealth": 85,
+    "PhysicalCondition": "Good",
+    "WaterDamage": false
+  },
+  "actualCondition": "Good",
+  "issues": [
+    "Minor scratches on back cover"
+  ],
+  "photos": [
+    "photo1.jpg",
+    "photo2.jpg"
+  ],
+  "notes": "Device is in good working condition with minor cosmetic wear."
+}
+
+### 7. Generate Assessment Report
+POST {{baseUrl}}/api/assessments/{{assessmentId}}/reports/generate
+
+### Test scenarios with different device types
+
+### Get Tablet Inspection Criteria
+GET {{baseUrl}}/api/assessments/devices/tablet/criteria
+
+### Get Laptop Inspection Criteria
+GET {{baseUrl}}/api/assessments/devices/laptop/criteria
+
+### Complete Inspection with Failed Critical Rule
+POST {{baseUrl}}/api/assessments/{{assessmentId}}/inspection/complete
+Content-Type: application/json
+
+{
+  "inspectionResults": {
+    "PowersOn": false,
+    "ScreenFunctional": false,
+    "BatteryHealth": 45,
+    "PhysicalCondition": "Poor",
+    "WaterDamage": true
+  },
+  "actualCondition": "Poor",
+  "issues": [
+    "Device does not power on",
+    "Screen is cracked",
+    "Water damage indicators activated"
+  ],
+  "photos": [
+    "water_damage1.jpg",
+    "broken_screen.jpg"
+  ],
+  "notes": "Device has significant damage and cannot be powered on."
+}
