@@ -1,7 +1,7 @@
 resource "azurerm_servicebus_namespace" "main" {
   name                = "goinggreen-sb-namespace"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = var.location
+  resource_group_name = var.resource_group_name
   sku                 = "Standard"
 }
 resource "azurerm_servicebus_topic" "quote_topic" {
