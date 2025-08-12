@@ -70,3 +70,35 @@ variable "key_vault_id" {
   description = "key vault id where data is storred"
   type        = string
 }
+
+variable "scaling_rules" {
+  description = "Custom scaling rules for the container app"
+  type = list(object({
+    name = string
+    type = string
+    metadata = map(string)
+    auth = optional(list(object({
+      secret_ref        = string
+      trigger_parameter = string
+    })))
+  }))
+  default = []
+}
+
+variable "http_concurrent_requests" {
+  description = "Number of concurrent HTTP requests before scaling up"
+  type        = number
+  default     = 50
+}
+
+variable "cpu_percentage_threshold" {
+  description = "CPU percentage threshold for scaling"
+  type        = number
+  default     = 70
+}
+
+variable "memory_percentage_threshold" {
+  description = "Memory percentage threshold for scaling"
+  type        = number
+  default     = 70
+}
