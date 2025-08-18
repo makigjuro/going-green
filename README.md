@@ -30,7 +30,7 @@ Below is the high-level architecture diagram for the solution:
 
 - **Containerized Microservices**: Developed in C#/.NET 9
 - **Serverless Containers**: Deployed on Azure Container Apps
-- **Infrastructure as Code**: Managed with Terraform
+- **Infrastructure as Code**: Managed with OpenTofu
 - **CI/CD Pipelines**: Automated via GitHub Actions
 - **Monitoring & Logging**: Integrated with Azure Monitor and Log Analytics
 
@@ -39,7 +39,7 @@ Below is the high-level architecture diagram for the solution:
 - [.NET 9 SDK](https://dotnet.microsoft.com/)
 - [.NET Aspire](https://github.com/dotnet-architecture/aspire)
 - [Azure Container Apps](https://azure.microsoft.com/en-us/services/container-apps/)
-- [Terraform](https://www.terraform.io/)
+- [OpenTofu](https://opentofu.org/)
 - [GitHub Actions](https://github.com/features/actions)
 - [Azure CLI](https://docs.microsoft.com/cli/azure/)
 
@@ -48,7 +48,7 @@ Below is the high-level architecture diagram for the solution:
 - [.NET 9 SDK](https://dotnet.microsoft.com/download)
 - [.NET Aspire tools](https://github.com/dotnet-architecture/aspire)
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
-- [Terraform](https://www.terraform.io/downloads.html)
+- [OpenTofu](https://opentofu.org/docs/intro/install/)
 - Git
 
 ## Getting Started
@@ -64,16 +64,16 @@ Below is the high-level architecture diagram for the solution:
    ```bash
    az login
 
-3. **Initialize Terraform**
+3. **Initialize OpenTofu**
    
    ```bash
    cd infra/terraform
-   terraform init
+   tofu init
 
 4. **Review and apply infrastructure**   
    ```bash
-    terraform plan
-    terraform apply
+    tofu plan
+    tofu apply
 
 4. **Build and Deploy Services**   
 
@@ -81,7 +81,7 @@ The GitHub Actions pipeline will automatically build Docker images and deploy to
 
 ## Infrastructure
 
-Terraform code is located in the infra/terraform folder. It defines:
+OpenTofu code is located in the infra/terraform folder. It defines:
 
 - Azure Resource Group
 

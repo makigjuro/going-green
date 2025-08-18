@@ -47,7 +47,8 @@ module "service_bus" {
 }
 
 locals {
-  ghcr_server = "ghcr.io/${var.ghcr_owner}"
+  ghcr_server = "ghcr.io"
+  ghcr_image_prefix = "ghcr.io/${var.ghcr_owner}"
 }
 
 resource "azurerm_container_app_environment" "main" {
@@ -66,7 +67,7 @@ module "gateway" {
   key_vault_id                 = module.keyvault.key_vault_id  
              
   # pull image from GitHub Container Registry 
-  image               = "${local.ghcr_server}/gateway:latest"
+  image               = "${local.ghcr_image_prefix}/gateway:latest"
   registry_server     = local.ghcr_server
   registry_username   = var.ghcr_username
   registry_password   = var.ghcr_token
@@ -96,7 +97,7 @@ module "payment_api" {
   key_vault_id                 = module.keyvault.key_vault_id
 
   # pull image from GitHub Container Registry 
-  image               = "${local.ghcr_server}/payment-api:latest"
+  image               = "${local.ghcr_image_prefix}/payment-api:latest"
   registry_server     = local.ghcr_server
   registry_username   = var.ghcr_username
   registry_password   = var.ghcr_token
@@ -133,7 +134,7 @@ module "customer_api" {
   key_vault_id                 = module.keyvault.key_vault_id
 
   # pull image from GitHub Container Registry 
-  image               = "${local.ghcr_server}/customer-api:latest"
+  image               = "${local.ghcr_image_prefix}/customer-api:latest"
   registry_server     = local.ghcr_server
   registry_username   = var.ghcr_username
   registry_password   = var.ghcr_token
@@ -170,7 +171,7 @@ module "quote_api" {
   key_vault_id                 = module.keyvault.key_vault_id
 
   # pull image from GitHub Container Registry 
-  image               = "${local.ghcr_server}/quote-api:latest"
+  image               = "${local.ghcr_image_prefix}/quote-api:latest"
   registry_server     = local.ghcr_server
   registry_username   = var.ghcr_username
   registry_password   = var.ghcr_token
@@ -207,7 +208,7 @@ module "shipping_api" {
   key_vault_id                 = module.keyvault.key_vault_id
 
   # pull image from GitHub Container Registry 
-  image               = "${local.ghcr_server}/shipping-api:latest"
+  image               = "${local.ghcr_image_prefix}/shipping-api:latest"
   registry_server     = local.ghcr_server
   registry_username   = var.ghcr_username
   registry_password   = var.ghcr_token
@@ -244,7 +245,7 @@ module "device_registry_api" {
   key_vault_id                 = module.keyvault.key_vault_id
 
   # pull image from GitHub Container Registry 
-  image               = "${local.ghcr_server}/device-registry-api:latest"
+  image               = "${local.ghcr_image_prefix}/device-registry-api:latest"
   registry_server     = local.ghcr_server
   registry_username   = var.ghcr_username
   registry_password   = var.ghcr_token
@@ -281,7 +282,7 @@ module "assessment_api" {
   key_vault_id                 = module.keyvault.key_vault_id
 
   # pull image from GitHub Container Registry 
-  image               = "${local.ghcr_server}/assessment-api:latest"
+  image               = "${local.ghcr_image_prefix}/assessment-api:latest"
   registry_server     = local.ghcr_server
   registry_username   = var.ghcr_username
   registry_password   = var.ghcr_token

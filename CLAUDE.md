@@ -48,11 +48,11 @@ Use the `.http` files in each API project for testing endpoints:
 
 ### Infrastructure
 ```bash
-# Deploy infrastructure
+# Deploy infrastructure with OpenTofu
 cd infra/terraform
-terraform init
-terraform plan
-terraform apply
+tofu init
+tofu plan
+tofu apply
 ```
 
 ## Key Technologies & Patterns
@@ -84,7 +84,7 @@ The AppHost (`apphost/GoingGreen.AppHost/Program.cs`) orchestrates:
 
 ## Infrastructure Modules
 
-Terraform modules in `infra/terraform/modules/`:
+OpenTofu modules in `infra/terraform/modules/`:
 - `azure_key_vault/`: Azure Key Vault for secrets
 - `azure_service_bus/`: Service Bus for messaging
 - `container_app/`: Azure Container Apps
@@ -106,4 +106,4 @@ Local emulator connection string: `"Endpoint=sb://servicebus-emulator/;SharedAcc
 - The solution uses Marten 8.0.0 for event sourcing
 - Services communicate via events published to Service Bus topics named after the event type
 - Each service maintains its own database schema via Marten auto-creation
-- Infrastructure is fully defined in Terraform with modular design
+- Infrastructure is fully defined in OpenTofu with modular design
